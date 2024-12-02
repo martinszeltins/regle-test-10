@@ -149,22 +149,10 @@
 
     const { r$ } = useRegle(form, rules, { externalErrors, autoDirty: true  })
 
-    const toggleLocale = () => {
-        setLocale(locale.value === 'en' ? locale.value = 'es' : locale.value = 'en')
-    }
-
-    const addShipmentItem = () => {
-        form.value.shipmentItems.push({ name: '', quantity: 1, weight: '' })
-    }
-
-    const getDirtyFields = () => {
-        console.log(r$.$extractDirtyFields())
-    }
-
     const save = async () => {
         const result = await r$.$validate()
 
-        console.log('result of client-side validation: ', result)
+        console.log('result of client-side validation: ', JSON.stringify(toRaw(result), null, 2))
 
         externalErrors.value = {
             referenceNumber: ['Backend says reference number is invalid'],
